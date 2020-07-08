@@ -2,6 +2,11 @@ class UsersController < ApplicationController
 
 
   
+    get '/login' do 
+        erb :"/users/login" 
+    end
+
+    
     post '/login' do
       user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
@@ -12,6 +17,11 @@ class UsersController < ApplicationController
       end
     
     end
+
+    get '/signup' do 
+        erb :"/users/signup"
+    end
+    
   
     post '/signup' do 
       if params[:username].empty? || params[:password].empty?

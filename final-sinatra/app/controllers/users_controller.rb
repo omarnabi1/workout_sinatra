@@ -3,8 +3,9 @@ class UsersController < ApplicationController
 
   
     get '/login' do 
-        erb :"/users/login" 
+      erb :"/users/login" 
     end
+
 
     
     post '/login' do
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do 
-        erb :"/users/signup"
+      erb :"/users/signup"
     end
     
   
@@ -90,8 +91,10 @@ class UsersController < ApplicationController
       else 
         redirect to '/'
       end
-      end
+      
     end
-  
-  
   end
+end
+
+
+  

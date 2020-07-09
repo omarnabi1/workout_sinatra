@@ -12,21 +12,25 @@ class WorkoutsController < ApplicationController
   
   
     get "/workouts/new" do
+      if logged_in?
       erb :"/workouts/new"
+    else  
+      redirect to '/'
     end
+  end
+
   
   
     post "/workouts" do
-      if params[:name].empty? || params[:duration].empty? || params[:calories_burned].empty?
-        redirect to '/workouts/new'
+      if params[:username] == "" || params[:email] == "" || params[:password] == "" || params[:name] == ""
+        redirect to '/workouts/new' 
       end 
-        if logged_in?
-          workout = Workout.create(params)
-          workout.user_id = current_user.id
-          workout.save
-          redirect "/workouts/#{workout.id}"
-      end
+      if logged_in?
+        workout = Workout.new(params)
+        workout.save
+        redirect to "/workouts"
     end
+  end
   
   
     get "/workouts/:id" do

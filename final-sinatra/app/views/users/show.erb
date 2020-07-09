@@ -1,1 +1,17 @@
 <h1>Welcome, <%=@user.name%>! </h1>
+
+<p>Manage Your Account</p>
+
+
+<%if @user.id == current_user.id%>
+<a href="/workouts/new"><button>Add Workout</button></a><br>
+<br>
+<a href="/workouts"><button>View Activity:</button></a><br>
+<br>
+
+<a href="/users/<%=@user.id%>/edit"><button>Edit Account:</button></a><br>
+<br>
+<form action="/users/<%= @user.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Account">
+<%end%>

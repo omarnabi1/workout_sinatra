@@ -10,13 +10,13 @@ class UsersController < ApplicationController
     
     post '/login' do
       user = User.find_by(:username => params[:username])
+
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id 
         redirect to "/users/#{user.id}"
       else
         redirect to '/'
       end
-    
     end
 
     get '/signup' do 
@@ -24,18 +24,23 @@ class UsersController < ApplicationController
     end
     
   
-    post '/signup' do 
-      if params[:username].empty? || params[:password].empty?
-        redirect to '/'
-      elsif user = User.find_by(:username => params[:username])
-        redirect to '/'
-      else
-      user = User.create(params)
-      session[:user_id] = user.id
-      redirect to "/users/#{user.id}"
-        end
-    end
-  
+    post '/signup' do
+      if params[:username] == "" || params[:email] == "" || params[:password] == "" || params[:name] == ""
+          redirect to '/signup'
+      
+        else
+         user = User.create(:username => params[:username], :email => params[:email], :password => params[:password], :name => params[:name])
+         
+          if user.save
+              session[:user_id] = user.id
+              redirect to '/user/show'
+         else
+              redirect to '/signup'
+         end
+          
+      end
+  end
+
     get '/logout' do 
       if session[:user_id] != nil 
         session.clear

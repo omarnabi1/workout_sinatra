@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
         redirect to '/workouts/new' 
       end 
       if logged_in?
-        workout = Workout.new(params)
+        workout = Workout.create(params)
         workout.save
         redirect to "/workouts"
     end

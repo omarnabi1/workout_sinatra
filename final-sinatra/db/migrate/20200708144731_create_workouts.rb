@@ -1,10 +1,11 @@
 class CreateWorkouts < ActiveRecord::Migration[5.2]
   def change
-    create_table :workouts do |t|
-      t.string :name
-      t.integer :duration
-      t.string :notes
-      t.timestamps null: false
+    create_table :workouts do |workout|
+      workout.string :name
+      workout.string :notes
+      workout.integer :duration
+      workout.integer :user_id
+      workout.timestamps null: false
     end
 
   end

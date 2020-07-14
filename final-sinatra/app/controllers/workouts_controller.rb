@@ -23,16 +23,18 @@ class WorkoutsController < ApplicationController
   
     post "/workouts" do
       if logged_in?
-      
-        params[:username] == "" || params[:email] == "" || params[:password] == "" || params[:name] == ""
-        redirect to '/workouts/new' 
+        workout = Workout.new(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id)
+        if workout.save 
+          redirect to "/workouts/#{workout.id}"
+        else
+          puts workout.errors
+          redirect to '/workouts/new' 
+        end
       
       else
+        redirect to '/'
    
-        workout = Workout.create(name: params[:name], duration: params[:duration],  notes: params[:notes]) 
-        workout.save 
-          workout.user_id = current_user.id 
-          redirect to '/workouts/#{workout.id)'
+        
       
         end
       end
@@ -40,38 +42,14 @@ class WorkoutsController < ApplicationController
         
  
   
-    get "/workouts/:id" do
-      if logged_in?
-        @workouts = Workout.find_by(:id => params[:id])
-        erb :"/workouts/show"
-      else
-        redirect to '/'
-      end
-    end
-
+    
       
   
   
-    get "/workouts/:id/edit" do
-      if logged_in?
-      workout = Workout.find_by(:id => params[:id])
-      erb :"/workouts/edit"
-      else
-     redirect to '/'
-      end
-    end
+    
   
   
-    patch "/workouts/:id" do
-      workout = Workout.find(params[:id])
-      if logged_in? && workout.user_id == current_user.id 
-         workout.update(params[:workout])
-         redirect "/workouts/#{workout.id}"
-       
-        else
-        redirect "/workouts/new"
-      end
-    end
+    
   
     
     delete "/workouts/:id" do

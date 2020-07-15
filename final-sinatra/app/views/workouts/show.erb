@@ -6,6 +6,7 @@ table, td {
 }
 </style>
 
+<body style="background-color:green;">
 
 <table>
   
@@ -32,7 +33,10 @@ table, td {
 <form action="/workouts/<%= @workout.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Workout">
+
+  <a href = '/workouts/index'><h5>Cancel</h5></a>
 <%end%>
 
+</body>
 
 

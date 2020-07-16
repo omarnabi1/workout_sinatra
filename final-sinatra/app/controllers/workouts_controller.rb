@@ -23,7 +23,6 @@ class WorkoutsController < ApplicationController
 
   
   
-  
   get "/workouts/:id" do
     if logged_in?
       @workout = Workout.find_by(:id => params[:id])
@@ -54,7 +53,24 @@ class WorkoutsController < ApplicationController
   end
 
 
-  
+  post "/workouts" do
+      if logged_in?
+        workout = Workout.new(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id)
+        if workout.save 
+          redirect to "/workouts/#{workout.id}"
+        else
+          puts workout.errors
+          redirect to '/workouts/new' 
+        end
+      
+      else
+        redirect to '/'
+   
+        
+      
+        end
+      end
+    end
        
   delete "/workouts/:id" do
       if logged_in?

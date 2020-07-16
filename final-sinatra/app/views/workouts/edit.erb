@@ -3,6 +3,7 @@
 <body style="background-color:green;">
 
 <form method = 'POST' action = '/login'>
+<input type="hidden" value="patch" name="_method">
 <label for = 'workout_type'>Workout Type:</label><br>
 <input type = 'text' id='workout_type' name = 'name' placeholder="Edit Workout Type" ><br>
 
@@ -17,7 +18,7 @@
 <input type = 'notes' id='notes' name = 'notes' placeholder="Edit Notes"><br>
 
 <br>
-    <input type = 'submit' value ='Hell Yeah!'>
+    <input type = 'submit' >
     </form>
     <br>
     <a href = '/'><h5>Cancel</h5></a>

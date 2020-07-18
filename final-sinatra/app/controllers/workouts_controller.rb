@@ -1,7 +1,6 @@
 require './config/environment'
 class WorkoutsController < ApplicationController
 
-
     get "/workouts" do
       if logged_in?
       @workouts = Workout.all
@@ -20,6 +19,7 @@ class WorkoutsController < ApplicationController
     end
   end
 
+
   get "/workouts/:id" do
     if logged_in?
       @workout = Workout.find_by(:id => params[:id])
@@ -29,26 +29,14 @@ class WorkoutsController < ApplicationController
     end
   end  
 
+
   get "/workouts/:id/edit" do
-    binding.pry
     if logged_in?
     @workout = Workout.find_by(:id => params[:id])
     erb :"/workouts/edit"
     else
    redirect to "/workouts/#{@workout.id}"
     end
-  end
-
-  post "/workouts" do
-    logged_in_else_redirect
-      workout = Workout.new(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id)
-      if workout.save 
-        redirect to "/workouts/#{workout.id}"
-      else
-        puts workout.errors
-        redirect to '/workouts/new' 
-      end
-    
   end
 
 
@@ -63,6 +51,18 @@ class WorkoutsController < ApplicationController
   end
 
 
+  post "/workouts" do
+    logged_in_else_redirect
+        workout = Workout.new(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id)
+        if workout.save 
+          redirect to "/workouts/#{workout.id}"
+        else
+          puts workout.errors
+          redirect to '/workouts/new' 
+        end
+      end
+    end
+
 
   delete "/workouts/:id" do
       if logged_in?
@@ -74,5 +74,4 @@ class WorkoutsController < ApplicationController
         redirect to '/'
     end
   end
-end
 end

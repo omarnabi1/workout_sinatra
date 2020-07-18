@@ -1,5 +1,5 @@
-<h1>Welcome, <%=current_user.name%>! </h1>
 <h2>Manage Your Workout</h2>
+<br>
 <style>
 table, td {
   border: 1px solid black;
@@ -29,12 +29,15 @@ table, td {
 <br>
 <a href="/workouts/<%=@workout.id%>/edit"><button>Edit Workout</button></a><br>
 <br>
+<a href="/workouts"><button>View All Workouts</button></a><br>
+<br>
 
 <form action="/workouts/<%= @workout.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Workout">
+  <br><br>
 
-  <a href = '/workouts/index'><h5>Cancel</h5></a>
+  
 <%end%>
 
 </body>

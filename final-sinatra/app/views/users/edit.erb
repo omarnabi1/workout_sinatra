@@ -1,11 +1,15 @@
-<h1>Edit Profile</h1><br>
+<body style="background-color:green;">
+<h2>Edit Profile</h2><br>
 
 
 <form action="/users/<%= @user.id %>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <label>Name:</label>
         <input type="text" name="name" value=<%= @user.name%>><br>
+        <br>
     <label>Username:</label>
         <input type="text" name="username" value=<%= @user.username%>><br>
+        <br>
     <input type="submit" value="Update Account">
 </form>
+</body>

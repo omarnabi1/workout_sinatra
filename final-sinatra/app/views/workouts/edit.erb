@@ -1,27 +1,29 @@
-<h1>Edit Workout</h1>
+
+<h1>Edit Your Workout</h1>
 
 <body style="background-color:green;">
 
 <form method = 'POST' action = "/workouts/<%=@workout.id%>">
-
 <input type="hidden" value="patch" name="_method">
-<label for = 'workout_type'>Workout Type:</label><br>
-<input type = 'text' id='workout_type' name = 'name' placeholder="Edit Workout Type" ><br>
-
 <br>
 
+<label for = 'workout_type'>Workout Type:</label><br>
+<input type = 'text' id='workout_type' name = 'name' placeholder= <%=@workout.name%> > <br><br>
+
+
+
 <label for = 'duration'>Duration:</label><br>
-<input type = 'duration' id='duration' name = 'duration' placeholder="Edit Duration"><br>
+<input type = 'duration' id='duration' name = 'duration' placeholder= <%=@workout.duration%> <br><br>
 
 <br>
 
 <label for = 'notes'>Notes:</label><br>
-<input type = 'notes' id='notes' name = 'notes' placeholder="Edit Notes"><br>
-
+<input type = 'notes' id='notes' name = 'notes' placeholder= <%=@workout.notes%> <br><br>
 <br>
+
     <input type = 'submit' >
     </form>
     <br>
-    <a href = '/'><h5>Cancel</h5></a>
+    <a href = '/workouts/index'><h5>Cancel</h5></a>
 
     <body/>

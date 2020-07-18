@@ -55,7 +55,7 @@ class WorkoutsController < ApplicationController
     logged_in_else_redirect
         workout = Workout.new(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id)
         if workout.save 
-          redirect to "/workouts/#{workout.id}"
+          redirect to "/workouts"
         else
           puts workout.errors
           redirect to '/workouts/new' 

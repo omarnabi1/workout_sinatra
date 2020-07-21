@@ -1,5 +1,8 @@
 <h1>All Workouts</h1>
-<a href="/users/#{@user.id}"><button>My Account</button></a><br>
+
+<a href="/users/<%=current_user.id%>"><button>My Account</button></a><br> #This will not redirect to the users/show.erb
+
+
 <br>
 <a href="/workouts/new"><button>New Workout</button></a><br>
 

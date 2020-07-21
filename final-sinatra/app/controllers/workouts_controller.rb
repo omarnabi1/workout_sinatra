@@ -3,7 +3,8 @@ class WorkoutsController < ApplicationController
 
     get "/workouts" do
       if logged_in?
-      @workouts = Workout.all
+        binding.pry
+      @workouts = current_user.workouts #this might be causing all of the workouts to show for any user.
       erb :"/workouts/index"
       else  
         redirect to '/'
@@ -22,7 +23,7 @@ class WorkoutsController < ApplicationController
 
   get "/workouts/:id" do
     if logged_in?
-      @workout = Workout.find_by(:id => params[:id])
+      @workout = current_user.workouts.find_by(:id => params[:id])
       erb :"/workouts/show"
     else
       redirect to '/'
@@ -53,14 +54,15 @@ class WorkoutsController < ApplicationController
 
   post "/workouts" do
     logged_in_else_redirect
-        workout = Workout.new(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id)
-        if workout.save 
+        @workout = Workout.create(name: params[:name], duration: params[:duration],  notes: params[:notes], user_id: current_user.id) #this might not be persisting the workout with the workout id.
+        @workout.save 
+        if @workout.save
           redirect to "/workouts"
           redirect to '/workouts/new' 
       end
     end
-  end
-  
+
+
 
   delete "/workouts/:id" do
       if logged_in?
@@ -72,4 +74,5 @@ class WorkoutsController < ApplicationController
         redirect to '/'
     end
   end
+end
 end

@@ -31,4 +31,19 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
   end
+  
+
+
+#   delete "/workouts/:id" do #This same controller will not work in the workouts controller but will work in the application controller
+#     if logged_in?
+#       workout = Workout.find_by(:id => params[:id]) 
+#       if workout.user == current_user
+#       workout.destroy
+#       redirect to "/users/#{current_user.id}"
+#     else
+#       redirect to '/'
+#   end
+# end
+# end
+
 end 
